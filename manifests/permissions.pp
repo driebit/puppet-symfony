@@ -5,6 +5,9 @@ define symfony::permissions (
   $apache_user = 'apache',
   $user        = 'vagrant'
 ) {
+  # Make sure permissions are run before Composer installs
+  Symfony::Permissions <| |> -> Symfony::Composer <| |>
+
   # Make sure ACL is installed
   if !defined(Package['acl']) {
     package { 'acl':
