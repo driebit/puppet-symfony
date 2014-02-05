@@ -1,7 +1,8 @@
 # Install Symfony application dependencies using Composer
 define symfony::composer (
   $binary = 'composer',
-  $dev    = true
+  $dev    = true,
+  $user   = undef
 ) {
   $devOption = $dev ? {
     true    => '--dev',
@@ -12,6 +13,7 @@ define symfony::composer (
     command     => "${binary} install --verbose --working-dir ${name} ${devOption}",
     timeout     => 0,
     environment => "COMPOSER_HOME=/home/vagrant/.",
-    path        => ['/usr/local/bin', '/usr/bin' ]
+    path        => ['/usr/local/bin', '/usr/bin' ],
+    user        => $user
   }
 }
