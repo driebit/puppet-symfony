@@ -17,7 +17,7 @@ define symfony::parameters (
     secret           => 'ThisTokenIsNotSoSecretChangeIt',
   }
 
-  $parameters = merge($defaults, $values)
+  $parameters = sort(merge($defaults, $values))
 
   file { "${name}":
     ensure  => present,
